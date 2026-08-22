@@ -6,28 +6,42 @@ export const Card: React.FC<CardProps> = ({ product }) => {
   const { id, name, price, image, description, stock } = product;
 
   return (
-    <div className="border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow max-w-sm bg-white flex flex-col justify-between">
+    <article className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden w-full max-w-sm">
       <div>
-        <img
-          src={image}
-          alt={name}
-          className="w-full h-48 object-cover rounded-t-lg mb-4"
-        />
-        <h2 className="text-xl font-bold text-gray-800">{name}</h2>
-        <p className="text-gray-600 text-sm my-2 line-clamp-3">{description}</p>
-        <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">
-          {stock} cupos disponibles
-        </span>
+        <div className="relative h-48 overflow-hidden bg-slate-100">
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <span className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+            {stock} cupos
+          </span>
+        </div>
+
+        <div className="p-5">
+          <h2 className="text-xl font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
+            {name}
+          </h2>
+          <p className="text-slate-600 text-sm my-2 line-clamp-3 leading-relaxed">
+            {description}
+          </p>
+        </div>
       </div>
-      <div className="flex justify-between items-center mt-4 pt-2 border-t border-gray-100">
-        <span className="text-lg font-bold text-green-600">${price} USD</span>
+
+      <div className="px-5 pb-5 pt-3 flex justify-between items-center border-t border-slate-100">
+        <div>
+          <span className="block text-[10px] uppercase font-bold text-slate-400">Precio</span>
+          <span className="text-lg font-extrabold text-slate-900">${price} <span className="text-xs font-normal text-slate-500">USD</span></span>
+        </div>
+
         <Link
           href={`/product/${id}`}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-colors text-xs font-semibold shadow-sm"
         >
           Ver Destino
         </Link>
       </div>
-    </div>
+    </article>
   );
 };
