@@ -1,8 +1,9 @@
 import React from "react";
+import Link from "next/link";
 import { CardProps } from "@/interface/productinterface";
 
 export const Card: React.FC<CardProps> = ({ product }) => {
-  const { name, price, image, description, stock } = product;
+  const { id, name, price, image, description, stock } = product;
 
   return (
     <div className="border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow max-w-sm bg-white flex flex-col justify-between">
@@ -20,9 +21,12 @@ export const Card: React.FC<CardProps> = ({ product }) => {
       </div>
       <div className="flex justify-between items-center mt-4 pt-2 border-t border-gray-100">
         <span className="text-lg font-bold text-green-600">${price} USD</span>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium">
+        <Link
+          href={`/product/${id}`}
+          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
+        >
           Ver Destino
-        </button>
+        </Link>
       </div>
     </div>
   );

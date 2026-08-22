@@ -3,10 +3,15 @@ import { productsMock } from "@/helpers/products.helper";
 
 export default function Home() {
   return (
-    <main className="min-h-screen p-8 bg-gray-50">
-      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
-        Explorá Nuestros Destinos
-      </h1>
+    <main className="max-w-7xl mx-auto p-8">
+      <section className="text-center my-8">
+        <h1 className="text-4xl font-extrabold text-slate-900 mb-2">
+          Descubrí tu próximo destino
+        </h1>
+        <p className="text-gray-600 max-w-xl mx-auto">
+          Explorá nuestros paquetes turísticos exclusivos y reservá tu próxima aventura.
+        </p>
+      </section>
 
       <div className="flex flex-wrap gap-6 justify-center">
         {productsMock.map((product) => (
