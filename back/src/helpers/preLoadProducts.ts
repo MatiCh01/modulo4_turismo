@@ -13,64 +13,64 @@ interface IProduct {
 
 const productsToPreLoad: IProduct[] = [
   {
-    name: "iPhone 11",
-    price: 699,
+    name: "Escapada a Bariloche",
+    price: 450,
     description:
-      "Experience power and elegance with the iPhone 11: capture stunning moments with its dual-camera system, enjoy exceptional performance, and immerse yourself in a brilliant Liquid Retina display. Discover a world of possibilities in the palm of your hand!",
+      "Disfrutá de 5 días inolvidables entre montañas, lagos cristalinos y las mejores chocolaterías artesanal de la Patagonia.",
     image:
-      "https://www.apple.com/v/iphone-11/a/images/meta/og__f2j3dwkzna2u.png",
+      "https://images.unsplash.com/photo-1702263525855-385a520842cf?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    categoryId: 1,
+    stock: 8,
+  },
+  {
+    name: "Cataratas del Iguazú",
+    price: 380,
+    description:
+      "Viví la fuerza de la naturaleza con este paquete de 4 días en plena selva misionera con excursiones y paseos en lancha incluidos.",
+    image:
+      "https://images.unsplash.com/photo-1648510399328-b8981e9fc1bb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    categoryId: 1,
+    stock: 12,
+  },
+  {
+    name: "Mendoza y Rutas del Vino",
+    price: 520,
+    description:
+      "3 noches de alojamiento con visitas guiadas a bodegas boutique, degustaciones exclusivas y cenas al pie de los Andes.",
+    image:
+      "https://images.unsplash.com/photo-1592783914986-a489c83c7aea?q=80&w=1514&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    categoryId: 2,
+    stock: 5,
+  },
+  {
+    name: "Aventura en Salta y Jujuy",
+    price: 490,
+    description:
+      "Recorré el Tren a las Nubes, las Salinas Grandes y los coloridos cerros del norte argentino en una expedición de 6 días.",
+    image:
+      "https://images.unsplash.com/photo-1603415017286-5c4e3492610f?q=80&w=1504&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     categoryId: 1,
     stock: 10,
   },
   {
-    name: "MacBook Air",
-    price: 999,
+    name: "Ushuaia Fin del Mundo",
+    price: 650,
     description:
-      "Embrace efficiency and sophistication with the MacBook Air: lightweight design meets powerful performance, stunning Retina display brings your work to life, and all-day battery life keeps you productive wherever you go. Elevate your computing experience with the MacBook Air.",
+      "Navegación por el Canal Beagle, visita al Parque Nacional Tierra del Fuego y experiencia gastronómica de centolla austral.",
     image:
-      "https://www.apple.com/v/macbook-air/a/images/meta/og__d5k62k8b4qka.png",
+      "https://images.unsplash.com/photo-1615656637621-5aa19f1ef847?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     categoryId: 2,
-    stock: 10,
+    stock: 6,
   },
   {
-    name: "iPad Pro",
-    price: 799,
+    name: "Calafate y Glaciar Perito Moreno",
+    price: 720,
     description:
-      "Unleash your creativity and productivity with the iPad Pro: powerful performance, stunning Liquid Retina display, and all-day battery life make the iPad Pro the perfect tool for work and play. Transform your ideas into reality with the iPad Pro.",
+      "Maravillate con los imponentes glaciares patagónicos, caminatas sobre hielo y pasarelas panorámicas durante 4 noches.",
     image:
-      "https://www.apple.com/v/ipad-pro/a/images/meta/og__d8m6x7smkntm.png",
-    categoryId: 3,
-    stock: 10,
-  },
-  {
-    name: "Apple Watch Series 6",
-    price: 399,
-    description:
-      "Stay connected and healthy with the Apple Watch Series 6: track your workouts, monitor your health, and stay in touch with the people and information you care about most. Experience the future of health and wellness with the Apple Watch Series 6.",
-    image:
-      "https://www.apple.com/v/apple-watch-series-6/a/images/meta/og__c1zv8c8n7q06.png",
-    categoryId: 4,
-    stock: 10,
-  },
-  {
-    name: "AirPods Pro",
-    price: 249,
-    description:
-      "Immerse yourself in sound with the AirPods Pro: active noise cancellation, transparency mode, and customizable fit make the AirPods Pro the perfect companion for music, calls, and everything in between. Elevate your audio experience with the AirPods Pro.",
-    image:
-      "https://www.apple.com/v/airpods-pro/a/images/meta/og__c1zv8c8n7q06.png",
-    categoryId: 5,
-    stock: 10,
-  },
-  {
-    name: "HomePod mini",
-    price: 99,
-    description:
-      "Elevate your home audio experience with the HomePod mini: immersive sound, intelligent assistant, and smart home hub make the HomePod mini the perfect addition to your home. Enjoy a world of music, news, and more with the HomePod mini.",
-    image:
-      "https://www.apple.com/v/homepod-mini/a/images/meta/og__d5k62k8b4qka.png",
-    categoryId: 6,
-    stock: 10,
+      "https://images.unsplash.com/photo-1593434820349-0ca11844c957?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    categoryId: 2,
+    stock: 7,
   },
 ];
 
