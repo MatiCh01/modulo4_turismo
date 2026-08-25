@@ -24,6 +24,25 @@ export const getUserOrders = async (token: string): Promise<IOrder[]> => {
     throw new Error("No se pudieron cargar las órdenes");
   }
 
-  const data = await response.json();
-  return data;
+  return await response.json();
+};
+
+export const createOrder = async (productIds: number[], token: string) => {
+  const response = await fetch(`${API_URL}/orders`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+    body: JSON.stringify({
+      products: productIds,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || "Error al procesar la reserva. Intenta nuevamente.");
+  }
+
+  return await response.json();
 };
