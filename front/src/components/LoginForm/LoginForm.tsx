@@ -37,7 +37,6 @@ export const LoginForm = () => {
     try {
       const response = await loginUser(data);
 
-      // AuthContext se encarga automáticamente de sincronizar con localStorage
       if (response.token) {
         setUserData({
           token: response.token,
@@ -58,8 +57,11 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md bg-white p-8 rounded-2xl shadow-md border border-slate-200">
-      <h2 className="text-2xl font-bold text-slate-900 mb-2 text-center">Iniciar Sesión</h2>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md bg-white p-8 rounded-3xl shadow-sm border border-slate-200/80">
+      <div className="text-center mb-2">
+        <h2 className="text-2xl font-black text-[#051F20]">Bienvenido de nuevo</h2>
+        <p className="text-xs text-slate-500 mt-1">Ingresá a tu cuenta para gestionar tus reservas</p>
+      </div>
 
       {/* Cartel de error devuelto por la API */}
       {serverError && (
@@ -69,27 +71,27 @@ export const LoginForm = () => {
       )}
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1">Email</label>
+        <label className="block text-sm font-semibold text-[#051F20] mb-1">Email</label>
         <input
           type="email"
           name="email"
           value={data.email}
           onChange={handleChange}
           placeholder="tu@email.com"
-          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+          className="w-full px-4 py-2.5 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-transparent text-sm transition-all"
         />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1">Contraseña</label>
+        <label className="block text-sm font-semibold text-[#051F20] mb-1">Contraseña</label>
         <input
           type="password"
           name="password"
           value={data.password}
           onChange={handleChange}
           placeholder="••••••••"
-          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+          className="w-full px-4 py-2.5 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-transparent text-sm transition-all"
         />
         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
       </div>
@@ -97,7 +99,7 @@ export const LoginForm = () => {
       <button
         type="submit"
         disabled={loading || Object.keys(errors).length > 0 || !data.email || !data.password}
-        className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white font-semibold py-2.5 rounded-xl transition-colors text-sm shadow-sm mt-2 flex items-center justify-center"
+        className="bg-[#235347] hover:bg-[#163832] disabled:bg-slate-200 disabled:text-slate-400 text-[#DAF1DE] font-semibold py-3 rounded-xl transition-all text-sm shadow-sm mt-2 flex items-center justify-center border border-[#8EB69B]/20"
       >
         {loading ? "Ingresando..." : "Ingresar"}
       </button>

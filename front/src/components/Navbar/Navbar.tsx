@@ -14,29 +14,39 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-sm text-white border-b border-slate-800 shadow-sm">
-      <nav className="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
-        <Link 
-          href="/" 
-          className="text-xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300 hover:opacity-90 transition-opacity"
-        >
-          ViajesGlobal <span className="text-blue-400 font-normal">✈️</span>
+    <header className="sticky top-0 z-50 bg-[#051F20]/95 backdrop-blur-md text-white border-b border-[#163832] shadow-sm">
+      <nav className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+        
+        {/* Brand Logo & Name */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-xl bg-[#235347] flex items-center justify-center text-xl text-[#DAF1DE] font-black group-hover:scale-105 transition-transform">
+            🌿
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xl font-extrabold tracking-tight text-[#DAF1DE]">
+              NATIVA
+            </span>
+            <span className="text-[10px] tracking-widest text-[#8EB69B] uppercase font-semibold">
+              Viajes & Experiencias
+            </span>
+          </div>
         </Link>
         
-        <div className="flex items-center gap-6 text-sm font-medium text-slate-300">
-          <Link href="/" className="hover:text-white transition-colors">
+        {/* Navigation Links */}
+        <div className="flex items-center gap-6 text-sm font-medium text-[#DAF1DE]/80">
+          <Link href="/" className="hover:text-[#DAF1DE] transition-colors">
             Inicio
           </Link>
 
           {/* Renderizado condicional basado en la sesión */}
           {userData ? (
             <>
-              <Link href="/dashboard" className="hover:text-white transition-colors">
-                Mi Perfil
+              <Link href="/dashboard" className="hover:text-[#DAF1DE] transition-colors">
+                Mi Perfil ({userData.user.name.split(" ")[0]})
               </Link>
               <Link 
                 href="/cart" 
-                className="bg-blue-600/20 text-blue-300 border border-blue-500/30 px-3 py-1.5 rounded-full hover:bg-blue-600 hover:text-white transition-all text-xs font-semibold"
+                className="bg-[#235347] text-[#DAF1DE] border border-[#8EB69B]/30 px-3.5 py-1.5 rounded-full hover:bg-[#163832] transition-all text-xs font-semibold flex items-center gap-1"
               >
                 Carrito 🛒
               </Link>
@@ -51,13 +61,13 @@ export const Navbar = () => {
             <>
               <Link 
                 href="/auth/login" 
-                className="hover:text-white transition-colors"
+                className="hover:text-[#DAF1DE] transition-colors"
               >
                 Ingresar
               </Link>
               <Link 
                 href="/auth/register" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-1.5 rounded-full transition-all text-xs font-semibold shadow-sm"
+                className="bg-[#235347] hover:bg-[#163832] text-[#DAF1DE] px-4 py-2 rounded-full transition-all text-xs font-semibold shadow-sm border border-[#8EB69B]/30"
               >
                 Registrarse
               </Link>

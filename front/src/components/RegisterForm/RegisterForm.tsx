@@ -42,7 +42,6 @@ export const RegisterForm = () => {
     setLoading(true);
 
     try {
-      // Llamada asíncrona a la API del backend
       await registerUser(data);
       
       setSuccessMessage("¡Registro exitoso! Redirigiendo al inicio de sesión...");
@@ -62,8 +61,11 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md bg-white p-8 rounded-2xl shadow-md border border-slate-200">
-      <h2 className="text-2xl font-bold text-slate-900 mb-2 text-center">Crear Cuenta</h2>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md bg-white p-8 rounded-3xl shadow-sm border border-slate-200/80">
+      <div className="text-center mb-2">
+        <h2 className="text-2xl font-black text-[#051F20]">Crear Cuenta</h2>
+        <p className="text-xs text-slate-500 mt-1">Sumate a Nativa y viví tu próxima experiencia</p>
+      </div>
 
       {/* Notificación de Error devuelta por el Backend */}
       {serverError && (
@@ -74,72 +76,72 @@ export const RegisterForm = () => {
 
       {/* Notificación de Éxito */}
       {successMessage && (
-        <div className="p-3 bg-green-50 border border-green-200 text-green-600 rounded-xl text-sm font-medium text-center">
+        <div className="p-3 bg-[#DAF1DE] border border-[#8EB69B] text-[#051F20] rounded-xl text-sm font-semibold text-center">
           {successMessage}
         </div>
       )}
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1">Nombre Completo</label>
+        <label className="block text-sm font-semibold text-[#051F20] mb-1">Nombre Completo</label>
         <input
           type="text"
           name="name"
           value={data.name}
           onChange={handleChange}
           placeholder="Juan Pérez"
-          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-transparent text-sm transition-all"
         />
         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1">Email</label>
+        <label className="block text-sm font-semibold text-[#051F20] mb-1">Email</label>
         <input
           type="email"
           name="email"
           value={data.email}
           onChange={handleChange}
           placeholder="tu@email.com"
-          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-transparent text-sm transition-all"
         />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1">Contraseña</label>
+        <label className="block text-sm font-semibold text-[#051F20] mb-1">Contraseña</label>
         <input
           type="password"
           name="password"
           value={data.password}
           onChange={handleChange}
           placeholder="••••••••"
-          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-transparent text-sm transition-all"
         />
         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1">Dirección</label>
+        <label className="block text-sm font-semibold text-[#051F20] mb-1">Dirección</label>
         <input
           type="text"
           name="address"
           value={data.address}
           onChange={handleChange}
           placeholder="Calle 123, Ciudad"
-          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-transparent text-sm transition-all"
         />
         {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-1">Teléfono</label>
+        <label className="block text-sm font-semibold text-[#051F20] mb-1">Teléfono</label>
         <input
           type="text"
           name="phone"
           value={data.phone}
           onChange={handleChange}
           placeholder="+54 11 12345678"
-          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+          className="w-full px-4 py-2 border rounded-xl border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-transparent text-sm transition-all"
         />
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
@@ -147,7 +149,7 @@ export const RegisterForm = () => {
       <button
         type="submit"
         disabled={loading || Object.keys(errors).length > 0 || !data.email || !data.password}
-        className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white font-semibold py-2.5 rounded-xl transition-colors text-sm shadow-sm mt-2 flex items-center justify-center"
+        className="bg-[#235347] hover:bg-[#163832] disabled:bg-slate-200 disabled:text-slate-400 text-[#DAF1DE] font-semibold py-3 rounded-xl transition-all text-sm shadow-sm mt-2 flex items-center justify-center border border-[#8EB69B]/20"
       >
         {loading ? "Registrando..." : "Registrarse"}
       </button>
