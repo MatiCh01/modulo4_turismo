@@ -1,4 +1,4 @@
-import { IProduct } from "@/interface/productinterface";
+import { IProduct } from "@/interface/product.interface";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3005";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { CardProps } from "@/interface/productinterface";
+import { CardProps } from "@/interface/product.interface";
 
 export const Card: React.FC<CardProps> = ({ product }) => {
   const { id, name, price, image, description, stock } = product;

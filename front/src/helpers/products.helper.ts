@@ -1,4 +1,4 @@
-import { IProduct } from "@/interface/productinterface";
+import { IProduct } from "@/interface/product.interface";
 
 export const productsMock: IProduct[] = [
   {

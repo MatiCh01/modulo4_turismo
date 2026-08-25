@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { Footer } from "@/components/Footer/Footer";
+import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,16 +20,22 @@ export const metadata: Metadata = {
   description: "Encontrá los mejores destinos y paquetes turísticos.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-gray-50 text-gray-900">
-        <Navbar />
-        <div className="flex-grow">{children}</div>
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <div className="flex-grow">{children}</div>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
