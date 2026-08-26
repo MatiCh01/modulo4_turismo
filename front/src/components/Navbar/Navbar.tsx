@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
@@ -19,9 +20,14 @@ export const Navbar = () => {
         
         {/* Brand Logo & Name */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-[#235347] flex items-center justify-center text-xl text-[#DAF1DE] font-black group-hover:scale-105 transition-transform">
-            🌿
-          </div>
+          <Image
+            src="/icon.png"
+            alt="Nativa Icono"
+            width={40}
+            height={40}
+            className="h-10 w-auto object-contain group-hover:scale-105 transition-transform"
+            priority
+          />
           <div className="flex flex-col">
             <span className="text-xl font-extrabold tracking-tight text-[#DAF1DE]">
               NATIVA

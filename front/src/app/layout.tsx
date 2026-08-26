@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ViajesGlobal | Tu agencia de viajes",
-  description: "Encontrá los mejores destinos y paquetes turísticos.",
+  title: "Nativa | Viajes & Experiencias",
+  description: "Descubrí experiencias de viaje para el descanso, la calma y la reconexión con la naturaleza.",
 };
 
 export default function RootLayout({

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export const Footer = () => {
   return (
@@ -7,7 +8,13 @@ export const Footer = () => {
         
         {/* Identidad Simplificada */}
         <div className="flex items-center gap-2">
-          <span className="text-base">🌿</span>
+          <Image
+            src="/icon.png"
+            alt="Nativa Icono"
+            width={28}
+            height={28}
+            className="h-7 w-auto object-contain"
+          />
           <span className="text-sm font-extrabold text-[#DAF1DE] tracking-wider">
             NATIVA VIAJES
           </span>
