@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = () => {
     setUserData(null);
     localStorage.removeItem("userSession");
+    localStorage.removeItem("cart");
   };
 
   return (
