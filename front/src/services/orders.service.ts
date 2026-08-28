@@ -11,12 +11,17 @@ export interface IOrder {
   }[];
 }
 
+const formatToken = (token: string) => {
+  if (!token) return "";
+  return token.startsWith("Bearer ") ? token : token;
+};
+
 export const getUserOrders = async (token: string): Promise<IOrder[]> => {
   const response = await fetch(`${API_URL}/users/orders`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      Authorization: formatToken(token),
     },
   });
 
@@ -32,7 +37,7 @@ export const createOrder = async (productIds: number[], token: string) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      Authorization: formatToken(token),
     },
     body: JSON.stringify({
       products: productIds,

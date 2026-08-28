@@ -7,35 +7,45 @@ interface AuthContextType {
   userData: IUserSession | null;
   setUserData: (userData: IUserSession | null) => void;
   logout: () => void;
+  isInitialized: boolean;
 }
 
 const AuthContext = createContext<AuthContextType>({
   userData: null,
   setUserData: () => {},
   logout: () => {},
+  isInitialized: false,
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userData, setUserData] = useState<IUserSession | null>(null);
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
 
-  // Al montar la app en el cliente, leemos la sesión guardada en localStorage
+  // Carga inicial del localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUser = localStorage.getItem("userSession");
       if (storedUser) {
-        setUserData(JSON.parse(storedUser));
+        try {
+          setUserData(JSON.parse(storedUser));
+        } catch {
+          localStorage.removeItem("userSession");
+        }
       }
+      setIsInitialized(true);
     }
   }, []);
 
-  // Cada vez que userData cambia, actualizamos o limpiamos el localStorage
+  // Sincronización continua de userData hacia localStorage
   useEffect(() => {
+    if (!isInitialized) return;
+
     if (userData) {
       localStorage.setItem("userSession", JSON.stringify(userData));
     } else {
       localStorage.removeItem("userSession");
     }
-  }, [userData]);
+  }, [userData, isInitialized]);
 
   const logout = () => {
     setUserData(null);
@@ -44,7 +54,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData, logout }}>
+    <AuthContext.Provider value={{ userData, setUserData, logout, isInitialized }}>
       {children}
     </AuthContext.Provider>
   );
