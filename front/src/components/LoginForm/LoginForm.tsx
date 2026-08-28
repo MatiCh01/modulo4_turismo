@@ -1,13 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { loginUser } from "@/services/auth.service";
 import { useAuth } from "@/context/AuthContext";
 import { ILoginProps, ILoginErrors, validateLoginForm } from "@/helpers/validateLogin";
 
 export const LoginForm = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get("redirect") || "/";
+
   const { setUserData } = useAuth();
 
   const [data, setData] = useState<ILoginProps>({ email: "", password: "" });
@@ -44,7 +47,8 @@ export const LoginForm = () => {
         });
       }
 
-      router.push("/");
+      // Redirección dinámica: /cart si venía de reservar, o / si fue un login directo
+      router.push(redirectPath);
     } catch (error: unknown) {
       if (error instanceof Error) {
         setServerError(error.message);
