@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { IProduct } from "@/interface/product.interface";
 import { createOrder } from "@/services/orders.service";
 
 export default function CartPage() {
-  const { userData } = useAuth();
+  const { userData, isInitialized } = useAuth();
   const router = useRouter();
 
   const [cart, setCart] = useState<IProduct[]>([]);
@@ -16,6 +17,8 @@ export default function CartPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!isInitialized) return;
+
     if (!userData) {
       router.push("/auth/login");
       return;
@@ -24,7 +27,7 @@ export default function CartPage() {
     // Cargar productos del localStorage
     const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
     setCart(storedCart);
-  }, [userData, router]);
+  }, [userData, isInitialized, router]);
 
   // Quitar un producto en particular
   const handleRemoveItem = (id: number) => {
@@ -66,7 +69,8 @@ export default function CartPage() {
     }
   };
 
-  if (!userData) {
+  // Previene el destello (FOUC) hasta terminar la hidratación
+  if (!isInitialized || !userData) {
     return null;
   }
 
@@ -131,11 +135,16 @@ export default function CartPage() {
                   className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200/60"
                 >
                   <div className="flex items-center gap-4">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-16 h-16 rounded-xl object-cover"
-                    />
+                    {/* Contenedor relativo con Image de Next.js */}
+                    <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-slate-200 flex-shrink-0">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        sizes="64px"
+                        className="object-cover"
+                      />
+                    </div>
                     <div>
                       <h3 className="font-bold text-[#051F20] text-sm">{item.name}</h3>
                       <p className="text-xs font-semibold text-[#235347]">${item.price} USD</p>

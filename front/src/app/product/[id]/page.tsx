@@ -1,5 +1,7 @@
 import { getProductById } from "@/services/products.service";
 import Link from "next/link";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 import { AddToCart } from "@/components/AddToCart/AddToCart";
 
 interface ProductDetailProps {
@@ -8,7 +10,19 @@ interface ProductDetailProps {
 
 export default async function ProductDetail({ params }: ProductDetailProps) {
   const { id } = await params;
-  const product = await getProductById(id);
+  
+  // Capturamos el producto de la API de forma segura
+  let product = null;
+  try {
+    product = await getProductById(id);
+  } catch (error) {
+    console.error("Error al obtener el producto:", error);
+  }
+
+  // Si no existe el producto o falla la respuesta, mandamos al 404 nativo
+  if (!product) {
+    notFound();
+  }
 
   const { name, price, image, description, stock } = product;
 
@@ -16,14 +30,17 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
     <main className="max-w-5xl mx-auto px-6 py-12">
       <div className="bg-white rounded-3xl border border-slate-200/80 shadow-md overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-8">
         
-        {/* Imagen del Destino */}
+        {/* Imagen del Destino Optimizada */}
         <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden bg-slate-100 border border-slate-100">
-          <img
+          <Image
             src={image}
             alt={name}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+            className="object-cover"
           />
-          <span className="absolute top-4 right-4 bg-[#051F20]/85 backdrop-blur-md text-[#DAF1DE] text-xs font-semibold px-3.5 py-1.5 rounded-full border border-[#8EB69B]/30 shadow-sm">
+          <span className="absolute top-4 right-4 bg-[#051F20]/85 backdrop-blur-md text-[#DAF1DE] text-xs font-semibold px-3.5 py-1.5 rounded-full border border-[#8EB69B]/30 shadow-sm z-10">
             🍃 {stock} cupos disponibles
           </span>
         </div>
@@ -49,7 +66,6 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
             </div>
 
             <div className="flex items-center gap-4">
-              {/* Botón interactivo conectado al localStorage */}
               <AddToCart product={product} />
 
               <Link
