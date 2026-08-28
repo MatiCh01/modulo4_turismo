@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { CardProps } from "@/interface/product.interface";
 
 export const Card: React.FC<CardProps> = ({ product }) => {
@@ -10,12 +11,14 @@ export const Card: React.FC<CardProps> = ({ product }) => {
       <div>
         {/* Contenedor de Imagen con Overlay y Badge de Cupos */}
         <div className="relative h-48 overflow-hidden bg-slate-100">
-          <img
+          <Image
             src={image}
             alt={name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
-          <span className="absolute top-3 right-3 bg-[#051F20]/85 backdrop-blur-md text-[#DAF1DE] text-xs font-semibold px-3 py-1 rounded-full border border-[#8EB69B]/30 shadow-sm">
+          <span className="absolute top-3 right-3 bg-[#051F20]/85 backdrop-blur-md text-[#DAF1DE] text-xs font-semibold px-3 py-1 rounded-full border border-[#8EB69B]/30 shadow-sm z-10">
             🍃 {stock} cupos
           </span>
         </div>
