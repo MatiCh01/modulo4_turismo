@@ -16,8 +16,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nativa | Viajes & Experiencias",
+  title: {
+    default: "Nativa | Viajes & Experiencias",
+    template: "%s | Nativa Viajes",
+  },
   description: "Descubrí experiencias de viaje para el descanso, la calma y la reconexión con la naturaleza.",
+  keywords: ["Turismo Argentina", "Viajes", "Reservas", "Mendoza", "Bariloche", "Nativa"],
+  authors: [{ name: "Nativa Viajes" }],
+  openGraph: {
+    title: "Nativa | Viajes & Experiencias",
+    description: "Descubrí experiencias de viaje para el descanso, la calma y la reconexión con la naturaleza.",
+    url: "https://nativa-viajes.com",
+    siteName: "Nativa Viajes",
+    locale: "es_AR",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

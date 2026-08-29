@@ -2,12 +2,15 @@ import { IProduct } from "@/interface/product.interface";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3005";
 
-// Obtener todos los productos
+// Obtener todos los productos con caché e ISR
 export const getProductsDB = async (): Promise<IProduct[]> => {
   try {
     const res = await fetch(`${API_URL}/products`, {
       method: "GET",
-      next: { revalidate: 3600 },
+      next: {
+        revalidate: 3600,
+        tags: ["products"],
+      },
     });
 
     if (!res.ok) {
@@ -17,11 +20,14 @@ export const getProductsDB = async (): Promise<IProduct[]> => {
     const products: IProduct[] = await res.json();
     return products;
   } catch (error) {
-    throw new Error(error as string);
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error("Ocurrió un error inesperado al consultar los productos.");
   }
 };
 
-// Obtener un producto por ID
+// Obtener un producto por ID reutilizando la caché del servidor
 export const getProductById = async (id: string): Promise<IProduct> => {
   try {
     const allProducts = await getProductsDB();
@@ -33,6 +39,9 @@ export const getProductById = async (id: string): Promise<IProduct> => {
 
     return product;
   } catch (error) {
-    throw new Error(error as string);
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error("Ocurrió un error al buscar el detalle del producto.");
   }
 };

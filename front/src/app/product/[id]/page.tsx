@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { getProductById } from "@/services/products.service";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,9 +9,45 @@ interface ProductDetailProps {
   params: Promise<{ id: string }>;
 }
 
+// Generador dinámico de Metadatos para SEO y redes sociales
+export async function generateMetadata({ params }: ProductDetailProps): Promise<Metadata> {
+  const { id } = await params;
+
+  let product = null;
+  try {
+    product = await getProductById(id);
+  } catch (error) {
+    console.error("Error obteniendo metadatos del producto:", error);
+  }
+
+  if (!product) {
+    return {
+      title: "Destino no encontrado",
+      description: "El destino solicitado no está disponible en Nativa Viajes.",
+    };
+  }
+
+  return {
+    title: product.name,
+    description: product.description.slice(0, 160),
+    openGraph: {
+      title: `${product.name} | Nativa Viajes`,
+      description: product.description.slice(0, 160),
+      images: [
+        {
+          url: product.image,
+          width: 800,
+          height: 600,
+          alt: product.name,
+        },
+      ],
+    },
+  };
+}
+
 export default async function ProductDetail({ params }: ProductDetailProps) {
   const { id } = await params;
-  
+
   // Capturamos el producto de la API de forma segura
   let product = null;
   try {
@@ -29,7 +66,6 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
   return (
     <main className="max-w-5xl mx-auto px-6 py-12">
       <div className="bg-white rounded-3xl border border-slate-200/80 shadow-md overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-8">
-        
         {/* Imagen del Destino Optimizada */}
         <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden bg-slate-100 border border-slate-100">
           <Image
@@ -76,7 +112,6 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
               </Link>
             </div>
           </div>
-
         </div>
       </div>
     </main>
