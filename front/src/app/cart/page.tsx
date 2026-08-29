@@ -24,25 +24,21 @@ export default function CartPage() {
       return;
     }
 
-    // Cargar productos del localStorage
     const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
     setCart(storedCart);
   }, [userData, isInitialized, router]);
 
-  // Quitar un producto en particular
   const handleRemoveItem = (id: number) => {
     const updatedCart = cart.filter((item) => item.id !== id);
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  // Vaciar todo el carrito
   const handleClearCart = () => {
     setCart([]);
     localStorage.removeItem("cart");
   };
 
-  // Procesar la compra
   const handleCheckout = async () => {
     if (!userData?.token || cart.length === 0) return;
 
@@ -53,7 +49,6 @@ export default function CartPage() {
       const productIds = cart.map((product) => product.id);
       await createOrder(productIds, userData.token);
 
-      // Limpiar carrito y redirigir
       localStorage.removeItem("cart");
       setCart([]);
       alert("¡Reserva realizada con éxito!");
@@ -69,7 +64,6 @@ export default function CartPage() {
     }
   };
 
-  // Previene el destello (FOUC) hasta terminar la hidratación
   if (!isInitialized || !userData) {
     return null;
   }
@@ -95,6 +89,7 @@ export default function CartPage() {
             <button
               onClick={handleClearCart}
               disabled={loading}
+              aria-label="Vaciar todos los productos del carrito"
               className="text-xs font-semibold text-slate-400 hover:text-red-500 disabled:opacity-50 transition-colors w-fit"
             >
               Vaciar Carrito
@@ -112,7 +107,7 @@ export default function CartPage() {
         {/* Carrito Vacío */}
         {cart.length === 0 ? (
           <div className="p-10 bg-[#DAF1DE]/30 rounded-2xl border border-dashed border-[#8EB69B] text-center flex flex-col items-center gap-3">
-            <span className="text-3xl">🍃</span>
+            <span className="text-3xl" role="img" aria-label="Hoja">🍃</span>
             <p className="text-[#051F20] text-sm font-medium">
               Actualmente no tienes productos agregados al carrito.
             </p>
@@ -136,11 +131,10 @@ export default function CartPage() {
                   className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200/60"
                 >
                   <div className="flex items-center gap-4">
-                    {/* Contenedor relativo con Image de Next.js */}
                     <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-slate-200 flex-shrink-0">
                       <Image
                         src={item.image}
-                        alt={item.name}
+                        alt={`Imagen en miniatura de ${item.name}`}
                         fill
                         sizes="64px"
                         className="object-cover"
@@ -155,6 +149,7 @@ export default function CartPage() {
                   <button
                     onClick={() => handleRemoveItem(item.id)}
                     disabled={loading}
+                    aria-label={`Quitar ${item.name} del carrito`}
                     className="text-xs font-medium text-slate-400 hover:text-red-500 disabled:opacity-50 transition-colors px-2 py-1"
                   >
                     Quitar
@@ -173,6 +168,7 @@ export default function CartPage() {
               <button
                 onClick={handleCheckout}
                 disabled={loading || cart.length === 0}
+                aria-label="Confirmar la reserva de los destinos en el carrito"
                 className="bg-[#235347] hover:bg-[#163832] disabled:bg-slate-300 disabled:text-slate-500 text-[#DAF1DE] font-bold px-6 py-3 rounded-xl transition-all text-sm shadow-sm border border-[#8EB69B]/20 flex items-center gap-2 cursor-pointer disabled:cursor-not-allowed"
               >
                 {loading ? (
